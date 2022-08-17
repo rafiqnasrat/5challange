@@ -1,8 +1,10 @@
+/* container class */
 .container
 {
     text-align: center;
     margin-top: 30px;
 }
+/* this is the textarea  */
 textarea{
     width: 100%;
     height: 30px;
@@ -22,15 +24,16 @@ textarea{
     color: white;
     border-radius: 5px 10px;
 }
-
+/* past class */
 .past{
     background-color: var(--bs-red);
 }
-
+/* present class */
 .present{
     background-color: var(--bs-yellow);
 }
 
+/* future class */
 .future
 {
     background-color: var(--bs-green);
