@@ -6,10 +6,10 @@ $(document).ready(function(){
 
     // DECLARING VARAIBLES
     let now = new Date();
-    now.setHours("11");
+    
     var hour = now.getHours();
 
-    console.log(hour);
+    
 
 
 
