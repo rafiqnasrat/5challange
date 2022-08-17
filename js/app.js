@@ -1,41 +1,88 @@
-// date for title 
-
 $(document).ready(function(){
-    $("#date").html(moment().format("MMMM, Do ,YYYY"));
-});
 
-// Object
-var now = new Date();
-// now.setHours("")
-// var for now time 
-var hour = now.getHours();
+    // SET DATE
+    $("#date").html(moment().format("dddd, MMMM, Do"));
 
-$(".event").each(function(){
-    // checking for past 
-    if(hour > $(this).data("time"))
+
+    // DECLARING VARAIBLES
+    let now = new Date();
+    now.setHours("11");
+    var hour = now.getHours();
+
+    console.log(hour);
+
+
+
+       $(".event").each(function(){
+
+            // CHECKING FOR PAST
+           if(hour > $(this).data("time"))
+           {
+                $(this).attr("class", "past"); //setAttribute("class", "value")
+           }
+
+            // CHECKING FOR PRESENT
+            if(hour == $(this).data("time"))
+            {
+                $(this).attr("class", "present");
+            }
+
+            // CHECKING FOR FUTURE
+            if(hour < $(this).data("time"))
+            {
+                $(this).attr("class", "future");
+            }
+
+
+
+            // RETRIVING DATA FROM LOCAL STORAGE
+            var eventHour = $(this).data("time");
+
+            for(var i=0; i<localStorage.length; i++)
+            {
+                var localStorageKey = localStorage.key(i);
+                if(eventHour == localStorageKey)
+                {
+                    $(this).val(localStorage.getItem(localStorageKey));
+                }
+            }
+
+
+       });
+
+
+
+    //STORING EVETNS
+    $(".saveBtn").click(function(e){
+
+
+
+        var textarea = e.target.parentElement.parentElement.querySelector("textarea");
+        var key = textarea.getAttribute("data-time");
+        var value = textarea.value;
+
+
+        window.localStorage.setItem("date", moment().format("MM DD YYYY"));
+        window.localStorage.setItem(key, value);
+
+    });
+
+
+
+
+
+
+
+    // CLEAR STORAGE WHEN DATE CHANGED
+    if(moment().format("MM DD YYYY") > window.localStorage.getItem("date"))
     {
-        $(this).attr("class", "past");
-
+        window.localStorage.clear();
     }
 
-    if(hour === $(this).data("time"))
-    {
-    $(this).attr("class", "present");
-}
-if(hour < $(this).data("time"))
-{
-    $(this).attr("class", "future");
-}
-    
-})
+
+});
 
 
 
-
-$(".saveBtn").click(function(e){
-    var textarea = e.target.parentElement.parentElement.querySelector("textarea");
-    var key = textarea.getAttribute("data-time");
-    var value = textarea.value;
-})
 
 
